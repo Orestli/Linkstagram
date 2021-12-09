@@ -1,0 +1,143 @@
+.ls-page {
+  display: flex;
+  justify-content: center;
+}
+
+// Images
+
+.ls-image {
+  margin: 48px 253px 0 0;
+  position: relative;
+  transition: 0.3s;
+}
+
+.ls-phone-item {
+  position: absolute;
+}
+
+//
+
+.ls-block {
+  margin-top: 178px;
+
+  opacity: 0;
+  animation: showing 2s forwards;
+}
+
+@keyframes showing {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.ls-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+}
+
+.ls-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.ls-title {
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 72px;
+
+  color: #010101;
+}
+
+.ls-input {
+  width: 360px;
+  height: 48px;
+  padding-left: 14px;
+
+  font-size: 16px;
+  line-height: 20px;
+
+  outline: none;
+  border: 1px solid #C9CAD1;
+  border-radius: 12px;
+  transition: 0.2s;
+
+  &:hover, &:focus {
+    border: 1px solid #0087FF;
+  }
+}
+
+.ls-button {
+  width: 360px;
+  height: 48px;
+  margin-top: 32px;
+
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+
+  background: #0087FF;
+  color: white;
+}
+
+.ls-subtitle {
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 20px;
+
+  color: #808080;
+
+  display: flex;
+  justify-content: center;
+}
+
+.sl-link {
+  padding-left: 14px;
+
+  font-size: 12px;
+  line-height: 20px;
+
+  color: #0087FF;
+}
+
+.ls-label {
+  margin: 16px 0 2px;
+  font-size: 12px;
+  line-height: 20px;
+
+  color: #808080;
+
+  &:first-child {
+    margin-top: 48px;
+  }
+}
+
+.ls-input-error {
+  font-size: 12px;
+  line-height: 20px;
+
+  color: #FB766E;
+}
+
+.ls-submit-block {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 425px) {
+  .ls-image {
+    display: none;
+  }
+
+  .ls-block {
+    margin-top: 48px;
+  }
+
+  .ls-submit-block {
+    margin-top: 65%;
+    flex-direction: column-reverse;
+  }
+}

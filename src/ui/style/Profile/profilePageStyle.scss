@@ -1,0 +1,107 @@
+.profile-page {
+  width: 100%;
+  max-width: 1076px;
+  margin: 64px auto 0;
+}
+
+.profile-information {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-about {
+  display: flex;
+}
+
+.profile-avatar {
+  width: 105px;
+  height: 105px;
+  margin-right: 32px;
+
+  filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.5));
+  border-radius: 26.3636px;
+}
+
+.profile-username {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 20px;
+
+  margin-bottom: 10px;
+  color: #010101;
+}
+
+.profile-job {
+  font-family: 'Poppins', sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+
+  margin-bottom: 20px;
+}
+
+.profile-bio {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+
+  color: #808080;
+}
+
+.active-container {
+  display: flex;
+  margin-bottom: 24px;
+  justify-content: flex-end;
+}
+
+.profile-followers {
+  margin-right: 83px;
+}
+
+.p-follow-count {
+  margin-bottom: 6px;
+}
+
+.p-follow-count {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 20px;
+
+  text-align: end;
+  color: #010101;
+}
+
+.profile-edit {
+  margin-right: 19px;
+}
+
+.buttons-container {
+  display: flex;
+}
+
+.profile-btn {
+  width: 140px;
+  height: 40px;
+
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+
+  border: 1px solid #C9CAD1;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.profile-edit {
+  color: black;
+  background: white;
+}
+
+.profile-post {
+  color: white;
+  background: #0087FF;
+}

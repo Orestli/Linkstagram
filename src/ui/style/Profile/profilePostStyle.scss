@@ -1,0 +1,14 @@
+.profile-posts {
+  margin: 48px 0;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(357px, 1fr));
+  grid-gap: 2px 2px;
+}
+
+.p-post-image {
+  width: 358px;
+  height: 358px;
+
+  cursor: pointer;
+}

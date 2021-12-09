@@ -1,0 +1,125 @@
+.post-text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+.post-container {
+  width: 560px;
+  margin: 48px 82px 0 0;
+}
+
+.post {
+  margin-bottom: 48px;
+}
+
+.post-header {
+  display: flex;
+}
+
+.post-avatar {
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+
+  border: 0.5px solid #C9CAD1;
+  border-radius: 12px;
+}
+
+.post-header-labels {
+  width: 100%;
+  max-width: 504px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-username {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.post-datetime {
+  font-size: 12px;
+  line-height: 20px;
+
+  color: #010101;
+  opacity: 0.25;
+}
+
+.post-more {
+
+}
+
+// content
+
+.post-content {
+  margin-top: 16px;
+}
+
+.post-image {
+  width: 100%;
+  max-width: 560px;
+  height: 560px;
+  border-radius: 48px;
+  transition: 0.3s;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
+.post-description-block {
+  margin: 20px 8px 0;
+}
+
+.post-description {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+
+  color: #808080;
+}
+
+// activity
+
+.post-active {
+  margin: 16px 8px 0;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-activity {
+  display: flex;
+}
+
+.post-likes {
+  margin-right: 45px;
+
+  display: flex;
+  align-items: center;
+}
+
+.post-comments {
+  display: flex;
+  align-items: center;
+}
+
+.post-share {
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.share-text {
+  margin-right: 11px;
+
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.post-likes-icon, .post-comments-icon {
+  margin-right: 11px;
+  cursor: pointer;
+}

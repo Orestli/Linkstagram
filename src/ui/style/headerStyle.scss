@@ -1,0 +1,92 @@
+a {
+  text-decoration: none;
+}
+
+.header {
+  height: 88px;
+  color: white;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+
+  display: flex;
+}
+
+.header-container {
+  width: 100%;
+  max-width: 1792px;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-title {
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 15.6735px;
+  line-height: 24px;
+
+  letter-spacing: -0.0489796px;
+
+  color: black;
+}
+
+.nav {
+  display: flex;
+}
+
+.nav-item:not(:last-child) {
+  margin-right: 16px;
+}
+
+.home {
+  width: 85px;
+  height: 40px;
+
+  border: 0.5px solid #C9CAD1;
+  border-radius: 12px;
+  background-color: black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+
+  color: white;
+}
+
+.language {
+  width: 40px;
+  height: 40px;
+
+  border: 0.5px solid #C9CAD1;
+  border-radius: 12px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.language-text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+
+  color: black;
+}
+
+.default-avatar {
+  width: 40px;
+  height: 40px;
+
+  border: 0.5px solid #C9CAD1;
+  border-radius: 12px;
+}

@@ -1,0 +1,44 @@
+.np-container {
+  padding: 48px;
+}
+
+.np-select-file {
+  margin-bottom: 32px;
+  width: 480px;
+  height: 345px;
+
+  cursor: pointer;
+  background: #C9CAD1;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.np-textarea {
+  padding: 14px;
+  width: 480px;
+  height: 108px;
+
+  font-size: 16px;
+  outline: none;
+  background: #FFFFFF;
+  border: 1px solid #C9CAD1;
+  border-radius: 12px;
+}
+
+.np-select-img {
+  margin-bottom: 24px;
+}
+
+.np-select-subtitle {
+  font-size: 16px;
+  line-height: 20px;
+  color: white;
+}
+
+.modal-p-submit {
+  margin-bottom: 0;
+}
