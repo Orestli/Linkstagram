@@ -6,10 +6,13 @@ import "../../style/reset.css"
 import "../../style/Main/profileStyle.scss"
 import ModalPage from "../common/ModalPage";
 import ModalProfile from "../Modal/ModalProfile";
+import ModalNewPost from "../Modal/ModalNewPost";
 
 const ProfileMain: React.FC = () => {
     const profile = useAppSelector(state => state.profileReducer)
+
     const [active, setActive] = useState(false)
+    const [activeNewPost, setActivePost] = useState(false)
 
     return (
         <div className="main-profile">
@@ -37,10 +40,10 @@ const ProfileMain: React.FC = () => {
                     </div>
             </div>
             <div className="main-action">
-                <button type="button" className="main-edit-btn" onClick={() => setActive(true)}>
+                <button type="button" className="modal-btn main-edit-btn" onClick={() => setActive(true)}>
                     <p className="main-text">Edit profile</p>
                 </button>
-                <button type="button" className="main-post-btn">
+                <button type="button" className="modal-btn main-post-btn" onClick={() => setActivePost(true)}>
                     <p className="main-text" style={{color: "white"}}>New post</p>
                 </button>
             </div>
@@ -52,6 +55,9 @@ const ProfileMain: React.FC = () => {
             </div>
             <ModalPage active={active} setActive={setActive} _padding="48px">
                 <ModalProfile profile={profile} setActive={setActive} />
+            </ModalPage>
+            <ModalPage active={activeNewPost} setActive={setActivePost}>
+                <ModalNewPost setActivePost={setActivePost} />
             </ModalPage>
         </div>
     )

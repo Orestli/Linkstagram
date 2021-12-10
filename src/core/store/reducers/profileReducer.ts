@@ -63,8 +63,6 @@ export const editAccount = (data: AccountDataI) => async (dispatch: AppDispatch)
     const response = await profileAPI.editAccount(data)
 
     if (response.status === StatusCode.success) {
-        console.log(response.data)
-
         // eslint-disable-next-line camelcase
         const {first_name, job_title, last_name, profile_photo_url,
             description, followers, following, username} = response.data

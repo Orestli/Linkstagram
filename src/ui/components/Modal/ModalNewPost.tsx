@@ -41,7 +41,7 @@ uppy.on('complete', result => {
 
     urlParams = {
         image: {
-            id: file.meta.key as string,
+            id: typeof file.meta.key === 'string' ? file.meta.key.substring(6) : '',
             storage: 'cache',
             metadata: {
                 filename: file.meta.name,

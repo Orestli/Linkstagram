@@ -36,11 +36,12 @@ let urlParams = {
         mime_type: ''
     }}
 
+
 uppy.on('complete', result => {
     const file = result.successful[0]
 
     urlParams = {
-        id: file.meta.key as string,
+        id: typeof file.meta.key === 'string' ? file.meta.key.substring(6) : '',
         storage: 'cache',
         metadata: {
             filename: file.meta.name,
