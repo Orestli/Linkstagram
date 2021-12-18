@@ -6,13 +6,11 @@ import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {setupStore} from "./core/store/store";
 
-const store = setupStore()
-
 ReactDOM.render(
   <React.StrictMode>
-      <Provider store={store}>
+      <Provider store={setupStore}>
           <BrowserRouter>
-              <App/>
+              <App />
           </BrowserRouter>
       </Provider>
   </React.StrictMode>,

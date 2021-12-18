@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
-import {getUserPosts} from "../../core/store/reducers/postReducer";
-import {getProfile} from "../../core/store/reducers/profileReducer";
 import defaultAvatar from "../../public/images/default-avatar.png"
 import ProfilePosts from "../components/ProfilePosts";
 import ModalPage from "../components/common/ModalPage";
@@ -11,14 +9,16 @@ import {useAppDispatch, useAppSelector} from "../hooks/redux";
 
 import "../style/reset.css"
 import "../style/Profile/profilePageStyle.scss"
-import "../style/modal/modalPage.scss"
+import "../components/Modal/modalPage.scss"
 import ModalNewPost from "../components/Modal/ModalNewPost";
+import { getProfile } from "../../core/store/reducers/ProfileReducer/profileThunks";
+import { getUserPosts } from "../../core/store/reducers/PostReducer/postThunks";
 
 const Profile: React.FC = () => {
     const profile = useAppSelector(state => state.profileReducer)
     const authUsername = useAppSelector(state => state.authReducer.username)
-    const dispatch = useAppDispatch()
     const urlParams = useParams()
+    const dispatch = useAppDispatch()
 
     const [active, setActive] = useState(false)
     const [activeNewPost, setActivePost] = useState(false)
@@ -40,7 +40,7 @@ const Profile: React.FC = () => {
                     <div>
                         <img className="profile-avatar" src={profile.profile_photo_url || defaultAvatar} alt="avatar"/>
                     </div>
-                    <div>
+                    <div className="profile-author-info">
                         <p className="profile-username">{(profile.first_name && profile.last_name) ?
                             `${profile.first_name} ${profile.last_name}` : `@${profile.username}`
                         }
@@ -73,7 +73,7 @@ const Profile: React.FC = () => {
                                     onClick={() => setActivePost(true)}>
                                 New post
                             </button>
-                            <ModalPage active={active} setActive={setActive} _padding="48px">
+                            <ModalPage active={active} setActive={setActive}>
                                 <ModalProfile profile={profile} setActive={setActive} />
                             </ModalPage>
                             <ModalPage active={activeNewPost} setActive={setActivePost}>

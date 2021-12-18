@@ -1,58 +1,69 @@
-import React from "react";
-import "../../style/modal/modalProfile.scss"
-import AuthorType from "../../../core/utils/models/AuthorType";
+import React, {useEffect, useState} from "react";
+import "./modalProfile.scss"
+import AuthorType from "../../../typing/AuthorType";
 import defaultAvatar from "../../../public/images/default-avatar.png"
 import {Field, Form, Formik} from "formik";
 import {useAppDispatch} from "../../hooks/redux";
-import {logout} from "../../../core/store/reducers/authReducer";
-import {FileInput} from "@uppy/react";
+import {FileInput, useUppy} from "@uppy/react";
 import Uppy from "@uppy/core";
 import AwsS3 from "@uppy/aws-s3";
 import {PhotoAttr} from "../../../core/services/api/profileAPI";
-import {editAccount} from "../../../core/store/reducers/profileReducer";
+import { logout } from "../../../core/store/reducers/AuthReducer/authReducer";
+import { editAccount } from "../../../core/store/reducers/ProfileReducer/profileThunks";
+import {useNavigate} from "react-router-dom";
 
 interface ModalProfileI {
     profile: AuthorType
     setActive: (state: boolean) => void
 }
 
-const uppy = new Uppy({
-    meta: { type: 'avatar' },
-    restrictions: { maxNumberOfFiles: 1 },
-    autoProceed: true,
-})
-
-uppy.use(AwsS3, {
-    companionUrl: 'https://linkstagram-api.ga/',
-    limit: 1
-})
-
-let urlParams = {
-    id: '',
-    storage: 'cache',
-    metadata: {
-        filename: '',
-        size: 0,
-        mime_type: ''
-    }}
-
-
-uppy.on('complete', result => {
-    const file = result.successful[0]
-
-    urlParams = {
-        id: typeof file.meta.key === 'string' ? file.meta.key.substring(6) : '',
-        storage: 'cache',
-        metadata: {
-            filename: file.meta.name,
-            size: file.size,
-            mime_type: file.meta.type as string
-        }
-    }
-})
-
 const ModalProfile: React.FC<ModalProfileI> = ({profile, setActive}) => {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+    const [urlParams, setUrlParams] = useState({
+        id: '',
+        storage: 'cache',
+        metadata: {
+            filename: '',
+            size: 0,
+            mime_type: ''
+        }
+    })
+
+    const uppy = useUppy(() => {
+        return new Uppy({
+            meta: { type: 'avatar' },
+            restrictions: { maxNumberOfFiles: 1 },
+            autoProceed: true,
+        })
+            .use(AwsS3, {
+                companionUrl: 'https://linkstagram-api.ga/',
+                limit: 1
+            })
+    })
+
+    useEffect(() => {
+        uppy.on('complete', result => {
+            const file = result.successful[0]
+
+            setUrlParams({
+                id: typeof file.meta.key === 'string' ? file.meta.key.substring(6) : '',
+                storage: 'cache',
+                metadata: {
+                    filename: file.meta.name,
+                    size: file.size,
+                    mime_type: file.meta.type as string
+                }
+            })
+        })
+    }, [])
+
+    const logOut = () => {
+        dispatch(logout())
+        localStorage.clear()
+
+        navigate('/login')
+    }
 
     const initialValues = {
         first_name: profile.first_name || '',
@@ -67,27 +78,28 @@ const ModalProfile: React.FC<ModalProfileI> = ({profile, setActive}) => {
             <Formik
                 initialValues={initialValues}
                 onSubmit={(values, {setSubmitting}) => {
-                    // eslint-disable-next-line no-param-reassign
-                    values.profile_photo = urlParams
+                    if (urlParams.id) {
+                        // eslint-disable-next-line no-param-reassign
+                        values.profile_photo = urlParams
+                        dispatch(editAccount({account: values}))
+                    } else {
+                        dispatch(editAccount(values))
+                    }
 
-                    dispatch(editAccount({account: values}))
                     setSubmitting(false);
                 }}
             >
                 {({isSubmitting}) => (
-                    <Form>
+                    <Form className="modal-p-form">
                         <div className="modal-p-title">
                             <p className="modal-profile">Profile information</p>
-                            <p className="modal-logout-btn" role="none" onClick={() => dispatch(logout())}>Log out</p>
+                            <p className="modal-logout-btn" role="none" onClick={() => logOut()}>Log out</p>
                         </div>
                         <div className="modal-p-general">
-                            <div style={{position: "relative"}}>
+                            <div className="modal-p-avatar-b">
                                 <img className="modal-p-avatar" src={profile.profile_photo_url || defaultAvatar}
                                      alt="avatar"/>
-                                {/* eslint-disable-next-line max-len */}
-                                {/* <input className="modal-choice-avatar" type="file" ref={fileRef} name="profile_photo" /> */}
                                 <FileInput
-                                    // assuming `this.uppy` contains an Uppy instance:
                                     uppy={uppy}
                                     pretty
                                     inputName="files[]"
@@ -122,7 +134,7 @@ const ModalProfile: React.FC<ModalProfileI> = ({profile, setActive}) => {
                             <button type="button" className="modal-value-text modal-btn modal-cancel"
                                     onClick={() => setActive(false)}>Cancel</button>
                             <button type="submit" className="modal-value-text modal-btn modal-submit"
-                                    disabled={isSubmitting}>Save</button>
+                                    disabled={isSubmitting} onClick={() => setActive(false)}>Save</button>
                         </div>
                     </Form>
                 )}

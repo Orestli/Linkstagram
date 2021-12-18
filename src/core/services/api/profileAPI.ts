@@ -1,10 +1,5 @@
 import instance from "../../utils/instance";
-import AuthorType from "../../utils/models/AuthorType";
-
-export interface AuthorPromiseType {
-    data: AuthorType
-    status: number
-}
+import AuthorType from "../../../typing/AuthorType";
 
 export interface PhotoAttr {
     // eslint-disable-next-line camelcase
@@ -18,36 +13,38 @@ export interface PhotoAttr {
     }
 }
 
-export interface AccountDataI {
-    account: {
-        // eslint-disable-next-line camelcase
-        profile_photo?: PhotoAttr
-        description?: string | null
-        // eslint-disable-next-line camelcase
-        first_name?: string | null
-        // eslint-disable-next-line camelcase
-        last_name?: string | null
-        // eslint-disable-next-line camelcase
-        job_title?: string | null
-    }
+export interface AccountData {
+    account: AccountDataPayload
+}
+
+export interface AccountDataPayload {
+    // eslint-disable-next-line camelcase
+    profile_photo?: PhotoAttr
+    description?: string | null
+    // eslint-disable-next-line camelcase
+    first_name?: string | null
+    // eslint-disable-next-line camelcase
+    last_name?: string | null
+    // eslint-disable-next-line camelcase
+    job_title?: string | null
 }
 
 const profileAPI = {
-    me(): Promise<AuthorPromiseType> {
+    me() {
         return instance.get<AuthorType>('account')
             .then(response => ({
                     data: response.data,
                     status: response.status
                 }))
     },
-    getProfile(username: string): Promise<AuthorPromiseType> {
+    getProfile(username: string) {
         return instance.get<AuthorType>(`profiles/${username}`)
             .then(response => ({
                 data: response.data,
                 status: response.status
             }))
     },
-    editAccount(data: AccountDataI): Promise<AuthorPromiseType> {
+    editAccount(data: AccountData | AccountDataPayload) {
         return instance.patch<AuthorType>('account', data)
             .then(response => ({
                 data: response.data,

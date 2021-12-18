@@ -1,8 +1,7 @@
 import React from "react";
 import {useAppDispatch, useAppSelector} from "../hooks/redux";
-import {loginUser} from "../../core/store/reducers/authReducer";
 import {ErrorMessage, Field, Form, Formik, FormikErrors} from "formik";
-import {Link, Navigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 import '../style/reset.css'
 import '../style/loginSignupPage.scss'
@@ -10,6 +9,7 @@ import phoneImg from '../../public/images/phone.png'
 import phone01 from '../../public/images/phone01.png'
 import phone02 from '../../public/images/phone02.png'
 import phone03 from '../../public/images/phone03.png'
+import {loginUser} from "../../core/store/reducers/AuthReducer/authThunks";
 
 interface MyFormValues {
     login: string
@@ -19,13 +19,17 @@ interface MyFormValues {
 const Login: React.FC = () => {
     const isAuth = useAppSelector(state => state.authReducer.isAuth)
     const dispatch = useAppDispatch()
+    const navigate = useNavigate();
 
-    const submit = (values: MyFormValues) => {
-        dispatch(loginUser(values.login, values.password))
+    if (isAuth) {
+        navigate('/')
     }
 
-    if (isAuth === true) {
-        return <Navigate to='/' />
+    const submit = (values: MyFormValues) => {
+        dispatch(loginUser({
+            login: values.login,
+            password: values.password
+        }))
     }
 
     const validate = (values: MyFormValues) => {

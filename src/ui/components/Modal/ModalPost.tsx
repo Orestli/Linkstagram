@@ -1,15 +1,15 @@
 import React from "react";
 import {PostCommentsI, PostI} from "../../../core/services/api/postsAPI";
 
-import "../../style/modal/modalPost.scss"
+import "./modalPost.scss"
 import defaultAvatar from "../../../public/images/default-avatar.png"
 import closeIcon from "../../../public/images/close.svg"
 import {Link} from "react-router-dom";
 import likeIcon from "../../../public/images/like.svg";
 import unlikeIcon from "../../../public/images/unlike.svg";
 import {useAppDispatch} from "../../hooks/redux";
-import {setLike, setDislike, leaveComment} from "../../../core/store/reducers/postReducer";
 import {Field, Form, Formik } from "formik";
+import {leaveComment, setDislike, setLike } from "../../../core/store/reducers/PostReducer/postThunks";
 
 interface ModalPostI {
     selectedPost: PostI
@@ -20,7 +20,8 @@ interface ModalPostI {
 const PostComments: React.FC<{postComments: PostCommentsI[]}> = ({postComments}) => {
     return (
         <div className="m-post-comments">
-            {postComments.map(comment => {
+            {Object.keys(postComments).length !== 0 &&
+            postComments.map(comment => {
                 return (
                     <div key={comment.id} className="modal-comment">
                         <Link to={`/profile/${comment.commenter.username}`}>
@@ -78,7 +79,12 @@ const ModalPost: React.FC<ModalPostI> = ({selectedPost, postComments, setActive}
                     <Formik
                         initialValues={{value: ''}}
                         onSubmit={(values) => {
-                            dispatch(leaveComment(selectedPost.id, values.value))
+                            dispatch(leaveComment({
+                                id: selectedPost.id,
+                                message: values.value
+                            }))
+                            // eslint-disable-next-line no-param-reassign
+                            values.value = ''
                         }}
                     >
                         <Form className="m-post-form">

@@ -3,27 +3,20 @@ import {
     Routes,
     Route
 } from "react-router-dom";
-
 import Login from '../../pages/Login';
 import SignUp from "../../pages/SignUp";
 import Main from "../../pages/Main";
-import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import Profile from "../../pages/Profile";
-import Header from "../../components/Header";
-import {getProfile} from "../../../core/store/reducers/profileReducer";
-import {getMe} from "../../../core/store/reducers/authReducer";
+import Header from "../../components/Header/Header";
+import {useAppDispatch} from "../../hooks/redux";
+import {getMe} from "../../../core/store/reducers/AuthReducer/authThunks";
 
 const App: React.FC = () => {
-    const username = useAppSelector(state => state.authReducer.username)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(getMe())
     }, [])
-
-    useEffect(() => {
-        if (username) dispatch(getProfile(username))
-    }, [username])
 
     return (
         <>

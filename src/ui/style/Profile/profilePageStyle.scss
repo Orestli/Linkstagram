@@ -50,6 +50,15 @@
   color: #808080;
 }
 
+.following, .followers {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+
+  color: #C9CAD1;
+}
+
 .active-container {
   display: flex;
   margin-bottom: 24px;
@@ -104,4 +113,61 @@
 .profile-post {
   color: white;
   background: #0087FF;
+}
+
+@media screen and (max-width: 425px) {
+  .profile-page {
+    margin-top: 32px;
+  }
+
+  .profile-information {
+    flex-direction: column;
+  }
+
+  .profile-active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-author-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-avatar {
+    margin: 0 0 27px 0;
+  }
+
+  .profile-username {
+    margin: 0 0 24px 0;
+  }
+
+  .profile-posts {
+    margin-bottom: 2px;
+  }
+
+  .profile-job, .profile-bio {
+    margin-bottom: 17px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .p-follow-count, .p-follow-count {
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 425px) {
+  .profile-information {
+    padding: 0 15px;
+  }
 }

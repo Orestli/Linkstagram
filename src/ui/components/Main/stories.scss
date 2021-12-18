@@ -1,0 +1,47 @@
+.stories {
+  width: 100%;
+  max-width: 560px;
+  margin: 48px auto 0;
+}
+
+.stories-list {
+  display: flex;
+}
+
+.story {
+  width: 64px;
+  height: 64px;
+
+  position: relative;
+
+  list-style: none;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-right: 24px;
+  }
+}
+
+.story-profile {
+  width: 56px;
+  height: 56px;
+
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .post-container {
+    overflow: scroll;
+  }
+
+  .stories {
+    overflow: scroll;
+  }
+}

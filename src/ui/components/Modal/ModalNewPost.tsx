@@ -1,100 +1,130 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
-import '../../style/modal/modalNewPost.scss'
+import './modalNewPost.scss'
+import photoFrame from '../../../public/images/photo-frame.png'
 import Uppy from "@uppy/core";
 import AwsS3 from "@uppy/aws-s3";
-import {Field, Form, Formik } from "formik";
+import {Field, Form, Formik, FormikErrors} from "formik";
 import {useAppDispatch} from "../../hooks/redux";
-import { DragDrop } from "@uppy/react";
-import {createPost} from "../../../core/store/reducers/postReducer";
+import {DragDrop, useUppy} from "@uppy/react";
+import {createPost} from "../../../core/store/reducers/PostReducer/postThunks";
 
 interface ModalNewPostI {
     setActivePost: (state: boolean) => void
 }
 
-const uppy = new Uppy({
-    meta: { type: 'avatar' },
-    restrictions: { maxNumberOfFiles: 1 },
-    autoProceed: true,
-})
-
-uppy.use(AwsS3, {
-    companionUrl: 'https://linkstagram-api.ga/',
-    limit: 1
-})
-
-let urlParams = {
-    image: {
-        id: '',
-        storage: 'cache',
-        metadata: {
-            filename: '',
-            size: 0,
-            mime_type: ''
-        }
-    }
+interface MyFormValues {
+    description: string
 }
-
-
-uppy.on('complete', result => {
-    const file = result.successful[0]
-
-    urlParams = {
-        image: {
-            id: typeof file.meta.key === 'string' ? file.meta.key.substring(6) : '',
-            storage: 'cache',
-            metadata: {
-                filename: file.meta.name,
-                size: file.size,
-                mime_type: file.meta.type as string
-            }
-        }
-    }
-})
 
 const ModalNewPost: React.FC<ModalNewPostI> = ({setActivePost}) => {
     const dispatch = useAppDispatch()
+    const [image, setImage] = useState<string>('')
+    const [urlParams, setUrlParams] = useState({
+        image: {
+            id: '',
+            storage: 'cache',
+            metadata: {
+                filename: '',
+                size: 0,
+                mime_type: ''
+            }
+        }
+    })
+
+    const uppy = useUppy(() => {
+        return new Uppy({
+            meta: { type: 'avatar' },
+            restrictions: { maxNumberOfFiles: 1 },
+            autoProceed: true,
+        })
+            .use(AwsS3, {
+                companionUrl: 'https://linkstagram-api.ga/',
+                limit: 1
+            })
+    })
+
+    useEffect(() => {
+        uppy.on('complete', result => {
+            const file = result.successful[0]
+
+            setUrlParams({
+                image: {
+                    id: typeof file.meta.key === 'string' ? file.meta.key.substring(6) : '',
+                    storage: 'cache',
+                    metadata: {
+                        filename: file.meta.name,
+                        size: file.size,
+                        mime_type: file.meta.type as string
+                    }
+                }
+            })
+
+            const reader = new FileReader()
+
+            reader.onloadend = () => setImage(reader.result as string)
+
+            if (file.data) {
+                reader.readAsDataURL(file.data)
+            }
+        })
+    }, [])
 
     const initialValues = {
         description: '',
         photos_attributes: [] as typeof urlParams[]
     }
 
+    // eslint-disable-next-line camelcase
+    const validate = () => {
+        // eslint-disable-next-line camelcase
+        const errors: FormikErrors<MyFormValues & {photos_attributes: typeof urlParams[]}> = {};
+
+        if (urlParams.image.id === '') {
+            errors.photos_attributes = 'Error'
+        }
+
+        return errors
+    }
+
     return (
         <div className="np-container">
             <Formik
                 initialValues={initialValues}
-                onSubmit={(values, {setSubmitting}) => {
+                validate={validate}
+                onSubmit={(values) => {
                     // eslint-disable-next-line no-param-reassign
                     values.photos_attributes.push(urlParams)
 
                     dispatch(createPost({post: values}))
-                    setSubmitting(false);
+                    setActivePost(false)
                 }}
                 enableReinitialize
             >
-                <Form>
-                    <div className="np-select-file">
-                        <DragDrop
-                            width="100%"
-                            height="100%"
-                            uppy={uppy}
-                        />
-                        {/* <img className="np-select-img" src={photoFrame} alt="frame"/> */}
-                        <p className="modal-text np-select-subtitle">Choose any photo from your library</p>
-                    </div>
-                    <div className="np-description">
-                        <p className="modal-text">Description</p>
-                        <Field className="modal-text np-textarea" placeholder="Description..."
-                               name="description" as="textarea" />
-                    </div>
-                    <div className="modal-p-submit">
-                        <button type="button" className="modal-btn modal-cancel"
-                                onClick={() => setActivePost(false)}>Cancel</button>
-                        <button type="submit" className="modal-btn modal-submit"
-                                onClick={() => setActivePost(false)}>Post</button>
-                    </div>
-                </Form>
+                {({errors}) => (
+                    <Form>
+                        {errors.photos_attributes && <p className="np-text-error">No image selected</p>}
+                        <div className="np-select-file" style={{backgroundImage: `url(${image})`}}>
+                            {/* {image && <img src={image} alt="preview"/>} */}
+                            <DragDrop uppy={uppy} className="np-dragdrop"/>
+                            <img className="np-select-img" src={photoFrame} alt="frame"/>
+                            <p className="modal-text np-select-subtitle">Choose any photo from your library</p>
+                        </div>
+                        <div className="np-description">
+                            <p className="modal-text">Description</p>
+                            <Field className="modal-text np-textarea" placeholder="Description..."
+                                   name="description" as="textarea" />
+                        </div>
+                        <div className="modal-p-submit">
+                            <button type="button" className="modal-value-text modal-btn modal-cancel"
+                                    onClick={() => {
+                                        setActivePost(false)
+                                        setImage('')
+                                    }}>Cancel</button>
+                            <button type="submit" className="modal-value-text modal-btn modal-submit">Post</button>
+                        </div>
+                    </Form>
+                )}
             </Formik>
         </div>
     )

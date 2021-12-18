@@ -3,7 +3,7 @@ import {useAppSelector} from "../../hooks/redux";
 
 import defaultAvatar from "../../../public/images/default-avatar.png"
 import "../../style/reset.css"
-import "../../style/Main/profileStyle.scss"
+import "./profileStyle.scss"
 import ModalPage from "../common/ModalPage";
 import ModalProfile from "../Modal/ModalProfile";
 import ModalNewPost from "../Modal/ModalNewPost";

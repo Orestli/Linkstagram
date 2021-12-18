@@ -1,0 +1,105 @@
+.main-profile {
+  width: 100%;
+  max-width: 304px;
+
+  margin: 33px 0 0;
+}
+
+.main-title {
+  width: 100%;
+  max-width: 279px;
+  margin: 0 auto 27px;
+
+  display: flex;
+  align-items: center;
+}
+
+.main-avatar {
+  width: 80px;
+  height: 80px;
+  margin: 0 24px;
+
+  border-radius: 20px;
+}
+
+.main-text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+
+  text-align: center;
+}
+
+.followers, .following {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+
+  color: #C9CAD1;
+  text-align: center;
+}
+
+.main-name-job {
+  margin-bottom: 17px;
+}
+
+.main-bio-text {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+
+  text-align: center;
+  color: #808080;
+}
+
+.main-action {
+  width: 100%;
+  max-width: 220px;
+  margin: 17px auto 0;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-edit-btn {
+  width: 104px;
+  height: 40px;
+
+  cursor: pointer;
+  border: none;
+  background: white;
+  border-radius: 12px;
+}
+
+.main-post-btn {
+  width: 104px;
+  height: 40px;
+
+  border: none;
+  background: #0087FF;
+  border-radius: 12px;
+}
+
+.main-footer {
+  margin-top: 32px;
+}
+
+.footer-text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  line-height: 20px;
+
+  text-align: center;
+  letter-spacing: 0.05em;
+
+  color: #C9CAD1;
+}
+
+@media screen and (max-width: 425px) {
+  .main-profile {
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,167 @@
+.modal-hr {
+  width: 100%;
+  border: 0.5px solid #C9CAD1;
+}
+
+.m-close-icon {
+  cursor: pointer;
+}
+
+.m-post {
+  height: 680px;
+  display: flex;
+}
+
+.m-post-img {
+  display: flex;
+}
+
+.m-img-content {
+  max-width: 599px;
+  max-height: 680px;
+
+  border-top-left-radius: 32px;
+  border-bottom-left-radius: 32px;
+}
+
+.m-info {
+  padding-top: 20px;
+  width: 480px;
+}
+
+.m-post-author {
+  margin: 0 32px 20px;
+
+  display: flex;
+  align-items: center;
+}
+
+.m-author-close {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.m-post-author-img {
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+
+  border: 0.5px solid #C9CAD1;
+  border-radius: 12px;
+}
+
+.m-post-comments {
+  max-height: 456px;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &:last-child {
+    margin-bottom: 42px;
+  }
+}
+
+.modal-comment {
+  width: 100%;
+  max-width: 416px;
+  margin: 42px 32px 0;
+
+  display: flex;
+
+  &:last-child {
+    margin: 42px 32px;
+  }
+}
+
+.comment-message {
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 20px;
+
+  margin-bottom: 4px;
+  color: black;
+}
+
+.comment-data {
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 20px;
+
+  color: #C9CAD1;
+}
+
+.m-post-like {
+  margin: 20px 0 20px 32px;
+
+  display: flex;
+  align-items: center;
+}
+
+.m-post-likes {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.m-post-form {
+  width: 100%;
+  padding: 0 35px 0 32px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.m-post-input {
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+
+  border: none;
+  outline: none;
+  color: black;
+}
+
+.m-post-submit {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  color: #0087FF;
+  background-color: white;
+}
+
+@media screen and (max-width: 425px) {
+  .m-post {
+    margin-top: 16px;
+    flex-direction: column;
+  }
+
+  .m-img-content {
+    width: 100%;
+    height: auto;
+    border-radius: 24px;
+  }
+
+  .m-info {
+    width: 100%;
+  }
+}
+
+@media (min-width: 425px) and (max-width: 768px) {
+
+}

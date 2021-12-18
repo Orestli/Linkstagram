@@ -1,8 +1,8 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 
-import authReducer from "./reducers/authReducer";
-import postReducer from "./reducers/postReducer";
-import profileReducer from "./reducers/profileReducer";
+import authReducer from "./reducers/AuthReducer/authReducer";
+import postReducer from "./reducers/PostReducer/postReducer";
+import profileReducer from "./reducers/ProfileReducer/profileReducer";
 
 const rootReducer = combineReducers({
     authReducer,
@@ -10,12 +10,9 @@ const rootReducer = combineReducers({
     profileReducer
 })
 
-export const setupStore = () => {
-    return configureStore({
-        reducer: rootReducer
-    })
-}
+export const setupStore = configureStore({
+    reducer: rootReducer
+})
 
 export type RootState = ReturnType<typeof rootReducer>
-export type AppStore = ReturnType<typeof setupStore>
-export type AppDispatch = AppStore['dispatch']
+export type AppDispatch = typeof setupStore.dispatch

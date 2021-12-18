@@ -1,10 +1,10 @@
 import React, {useState} from "react";
+import { getPostById } from "../../core/store/reducers/PostReducer/postThunks";
 import {useAppDispatch, useAppSelector} from "../hooks/redux";
 
 import "../style/Profile/profilePostStyle.scss"
 import ModalPage from "./common/ModalPage";
 import ModalPost from "./Modal/ModalPost";
-import {getPostById} from "../../core/store/reducers/postReducer";
 
 const ProfilePosts: React.FC = () => {
     const {posts, selectedPost, postComments} = useAppSelector(state => state.postReducer)
@@ -18,7 +18,7 @@ const ProfilePosts: React.FC = () => {
 
     return (
         <div className="profile-posts">
-            {posts && posts.map(post => {
+            {Object.keys(posts).length !== 0 && posts.map(post => {
                 return (
                     <div key={post.id} className="p-post-block">
                         <img className="p-post-image" src={post.photos[0].url} alt=""

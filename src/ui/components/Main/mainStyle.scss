@@ -1,0 +1,22 @@
+.main {
+  display: flex;
+  justify-content: center;
+
+  background: #FAFBFC;
+}
+
+.main-container {
+  margin-right: 82px;
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    flex-direction: column;
+    justify-content: initial;
+  }
+
+  .main-container {
+    margin: 0;
+    padding: 0 10px;
+  }
+}

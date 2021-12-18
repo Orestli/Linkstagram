@@ -1,5 +1,5 @@
 import React from "react";
-import '../../style/Main/stories.scss'
+import './stories.scss'
 
 import storyFrame from '../../../public/images/story_frame.svg'
 

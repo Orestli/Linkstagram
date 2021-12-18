@@ -8,11 +8,11 @@ import arrow from "../../../public/images/arrow.svg"
 import commentsIcon from "../../../public/images/comments.svg"
 import moreIcon from "../../../public/images/more.svg"
 import "../../style/reset.css"
-import "../../style/Main/postStyle.scss"
+import "./postStyle.scss"
 import {Link} from "react-router-dom";
-import {getPostById, setDislike, setLike} from "../../../core/store/reducers/postReducer";
 import ModalPage from "../common/ModalPage";
 import ModalPost from "../Modal/ModalPost";
+import { getPostById, setDislike, setLike } from "../../../core/store/reducers/PostReducer/postThunks";
 
 const PostsMain: React.FC = () => {
     const {posts, selectedPost, postComments} = useAppSelector(state => state.postReducer)
@@ -27,7 +27,6 @@ const PostsMain: React.FC = () => {
 
     const sharePost = (id: number) => {
         navigator.clipboard.writeText(`/post/${id}`)
-
     }
 
     return (

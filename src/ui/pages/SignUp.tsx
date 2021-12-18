@@ -1,13 +1,14 @@
 import {ErrorMessage, Field, Form, Formik, FormikErrors} from "formik";
 import React from "react";
 
-import {AuthDataI, registration} from "../../core/store/reducers/authReducer";
+import {AuthData} from "../../core/store/reducers/AuthReducer/authReducer";
 import {useAppDispatch, useAppSelector} from "../hooks/redux";
 import phoneImg from "../../public/images/phone.png";
 import phone01 from "../../public/images/phone01.png";
 import phone02 from "../../public/images/phone02.png";
 import phone03 from "../../public/images/phone03.png";
-import {Link, Navigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import { registration } from "../../core/store/reducers/AuthReducer/authThunks";
 
 interface MyFormValues {
     login: string
@@ -17,15 +18,19 @@ interface MyFormValues {
 
 const SignUp: React.FC = () => {
     const isAuth = useAppSelector(state => state.authReducer.isAuth)
-
     const dispatch = useAppDispatch()
+    const navigate = useNavigate();
 
-    const submit = (values: AuthDataI) => {
-        dispatch(registration(values.username, values.login, values.password))
+    if (isAuth) {
+        navigate('/')
     }
 
-    if (isAuth === true) {
-        return <Navigate to='/' />
+    const submit = (values: AuthData) => {
+        dispatch(registration({
+            username: values.username,
+            login: values.login,
+            password: values.password
+        }))
     }
 
     const validate = (values: MyFormValues) => {
@@ -99,7 +104,7 @@ const SignUp: React.FC = () => {
                                    placeholder="Type in..."
                                    style={errors.password && touched.password && {border: "1px solid #FB766E"}} />
                             <div className="ls-submit-block">
-                                <button className="ls-text ls-button" type="submit">Log In</button>
+                                <button className="ls-text ls-button" type="submit">Sign up</button>
                                 <p className="ls-text ls-subtitle">Have an account?
                                     <Link to="/login" className="ls-text sl-link" >Log In</Link></p>
                             </div>
