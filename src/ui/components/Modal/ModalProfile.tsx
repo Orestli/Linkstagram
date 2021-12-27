@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./modalProfile.scss"
-import AuthorType from "../../../typing/AuthorType";
+import AuthorResponse from "../../../typing/AuthorResponse";
 import defaultAvatar from "../../../public/images/default-avatar.png"
 import {Field, Form, Formik} from "formik";
 import {useAppDispatch} from "../../hooks/redux";
@@ -13,7 +13,7 @@ import { editAccount } from "../../../core/store/reducers/ProfileReducer/profile
 import {useNavigate} from "react-router-dom";
 
 interface ModalProfileI {
-    profile: AuthorType
+    profile: AuthorResponse
     setActive: (state: boolean) => void
 }
 

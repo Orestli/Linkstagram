@@ -1,20 +1,20 @@
 import instance from "../../utils/instance";
-import AuthorType from "../../../typing/AuthorType";
-import PhotoType from "../../../typing/PhotoType";
+import AuthorResponse from "../../../typing/AuthorResponse";
+import PhotoPayload from "../../../typing/PhotoPayload";
 import {PhotoAttr} from "./profileAPI";
 
 /* eslint-disable camelcase */
 
 export interface PostI {
     id: number
-    author: AuthorType
+    author: AuthorResponse
 
     comments_count: number
     created_at: string
     description: string
     is_liked: boolean
     likes_count: number
-    photos: PhotoType[]
+    photos: PhotoPayload[]
 }
 
 interface LikeI {
@@ -32,7 +32,7 @@ export interface NewPostI {
 
 export interface PostCommentsI {
     id: number
-    commenter: AuthorType
+    commenter: AuthorResponse
     created_at: string
     message: string
 }

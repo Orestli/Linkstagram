@@ -1,5 +1,5 @@
 import instance from "../../utils/instance";
-import AuthorType from "../../../typing/AuthorType";
+import AuthorResponse from "../../../typing/AuthorResponse";
 
 export interface PhotoAttr {
     // eslint-disable-next-line camelcase
@@ -31,21 +31,21 @@ export interface AccountDataPayload {
 
 const profileAPI = {
     me() {
-        return instance.get<AuthorType>('account')
+        return instance.get<AuthorResponse>('account')
             .then(response => ({
                     data: response.data,
                     status: response.status
                 }))
     },
     getProfile(username: string) {
-        return instance.get<AuthorType>(`profiles/${username}`)
+        return instance.get<AuthorResponse>(`profiles/${username}`)
             .then(response => ({
                 data: response.data,
                 status: response.status
             }))
     },
     editAccount(data: AccountData | AccountDataPayload) {
-        return instance.patch<AuthorType>('account', data)
+        return instance.patch<AuthorResponse>('account', data)
             .then(response => ({
                 data: response.data,
                 status: response.status

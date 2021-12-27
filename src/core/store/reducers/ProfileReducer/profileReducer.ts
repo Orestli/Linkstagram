@@ -1,11 +1,11 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-import AuthorType from "../../../../typing/AuthorType";
+import AuthorResponse from "../../../../typing/AuthorResponse";
 import {editAccount, getProfile} from "./profileThunks";
 
 /* eslint-disable no-param-reassign */
 
-const initialState: AuthorType = {
+const initialState: AuthorResponse = {
     username: '',
     description: null,
     first_name: null,
@@ -21,7 +21,7 @@ const ProfileAPI = createSlice({
     initialState,
     reducers: {},
     extraReducers: {
-        [getProfile.fulfilled.type]: (state, action: PayloadAction<AuthorType>) => {
+        [getProfile.fulfilled.type]: (state, action: PayloadAction<AuthorResponse>) => {
             state.username = action.payload.username
             state.description = action.payload.description
             state.first_name = action.payload.first_name
@@ -31,7 +31,7 @@ const ProfileAPI = createSlice({
             state.last_name = action.payload.last_name
             state.profile_photo_url = action.payload.profile_photo_url
         },
-        [editAccount.fulfilled.type]: (state, action: PayloadAction<AuthorType>) => {
+        [editAccount.fulfilled.type]: (state, action: PayloadAction<AuthorResponse>) => {
             state.username = action.payload.username
             state.description = action.payload.description
             state.first_name = action.payload.first_name

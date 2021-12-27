@@ -17,7 +17,7 @@ export const registration = createAsyncThunk(
         const response = await authAPI.registration(data.username, data.login, data.password)
 
         localStorage.clear()
-        localStorage.setItem('authorization', String(response.authorization))
+        localStorage.setItem('authorization', response.authorization)
 
         return response.data
     }
@@ -29,7 +29,7 @@ export const loginUser = createAsyncThunk(
         const response = await authAPI.login(data.login, data.password)
 
         localStorage.clear()
-        localStorage.setItem('authorization', String(response.authorization))
+        localStorage.setItem('authorization', response.authorization)
 
         return response.data
     }

@@ -1,5 +1,5 @@
 import React from "react";
-import ModalPageI from "../../../typing/ModalPageType";
+import ModalPageI from "../../../typing/ModalPagePayload";
 
 const ModalPage: React.FC<ModalPageI> = ({active, setActive, children}) => {
     return (
