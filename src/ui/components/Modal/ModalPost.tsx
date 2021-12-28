@@ -1,5 +1,5 @@
 import React from "react";
-import {PostCommentsI, PostI} from "../../../core/services/api/postsAPI";
+import {PostCommentsResponse, PostResponse} from "../../../core/services/api/postsAPI";
 
 import "./modalPost.scss"
 import defaultAvatar from "../../../public/images/default-avatar.png"
@@ -12,12 +12,12 @@ import {Field, Form, Formik } from "formik";
 import {leaveComment, setDislike, setLike } from "../../../core/store/reducers/PostReducer/postThunks";
 
 interface ModalPostI {
-    selectedPost: PostI
-    postComments: PostCommentsI[]
+    selectedPost: PostResponse
+    postComments: PostCommentsResponse[]
     setActive: (state: boolean) => void
 }
 
-const PostComments: React.FC<{postComments: PostCommentsI[]}> = ({postComments}) => {
+const PostComments: React.FC<{postComments: PostCommentsResponse[]}> = ({postComments}) => {
     return (
         <div className="m-post-comments">
             {Object.keys(postComments).length !== 0 &&

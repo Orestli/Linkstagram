@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import postsAPI, {NewPostI} from "../../../services/api/postsAPI";
+import postsAPI, {NewPostResponse} from "../../../services/api/postsAPI";
 
 export const getPosts = createAsyncThunk(
     'post/getPosts',
@@ -70,7 +70,7 @@ export const leaveComment = createAsyncThunk(
 
 export const createPost = createAsyncThunk(
     'post/createPost',
-    async (data: NewPostI) => {
+    async (data: NewPostResponse) => {
         const response = await postsAPI.createPost(data)
 
         return response.data

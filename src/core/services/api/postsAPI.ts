@@ -5,7 +5,7 @@ import {PhotoAttr} from "./profileAPI";
 
 /* eslint-disable camelcase */
 
-export interface PostI {
+export interface PostResponse {
     id: number
     author: AuthorResponse
 
@@ -17,11 +17,11 @@ export interface PostI {
     photos: PhotoPayload[]
 }
 
-interface LikeI {
+interface LikeResponse {
     status: number
 }
 
-export interface NewPostI {
+export interface NewPostResponse {
     post: {
         description: string
         photos_attributes: Array<{
@@ -30,7 +30,7 @@ export interface NewPostI {
     }
 }
 
-export interface PostCommentsI {
+export interface PostCommentsResponse {
     id: number
     commenter: AuthorResponse
     created_at: string
@@ -39,54 +39,54 @@ export interface PostCommentsI {
 
 const postsAPI =  {
     getAllPosts(page = 1) {
-        return instance.get<PostI[]>(`posts?${page}`)
+        return instance.get<PostResponse[]>(`posts?${page}`)
             .then(response => ({
                 data: response.data,
                 status: response.status
             }))
     },
     getPostById(id: number) {
-        return instance.get<PostI>(`posts/${id}`)
+        return instance.get<PostResponse>(`posts/${id}`)
             .then(response => ({
                 data: response.data,
                 status: response.status
             }))
     },
     getUserPosts(username: string) {
-        return instance.get<PostI[]>(`profiles/${username}/posts`)
+        return instance.get<PostResponse[]>(`profiles/${username}/posts`)
             .then(response => ({
                 data: response.data,
                 status: response.status
             }))
     },
     like(id: number) {
-        return instance.post<LikeI>(`posts/${id}/like`)
+        return instance.post<LikeResponse>(`posts/${id}/like`)
             .then(response => ({
                 status: response.status
             }))
     },
     unlike(id: number) {
-        return instance.delete<LikeI>(`posts/${id}/like`)
+        return instance.delete<LikeResponse>(`posts/${id}/like`)
             .then(response => ({
                 status: response.status
             }))
     },
     getCommentsById(id: number) {
-        return instance.get<PostCommentsI[]>(`posts/${id}/comments`)
+        return instance.get<PostCommentsResponse[]>(`posts/${id}/comments`)
             .then(response => ({
                 data: response.data,
                 status: response.status
             }))
     },
     leaveComment(id: number, message: string) {
-        return instance.post<PostCommentsI>(`posts/${id}/comments`, {message})
+        return instance.post<PostCommentsResponse>(`posts/${id}/comments`, {message})
             .then(response => ({
                 data: response.data,
                 status: response.status
             }))
     },
-    createPost(data: NewPostI) {
-        return instance.post<PostI>('posts', data)
+    createPost(data: NewPostResponse) {
+        return instance.post<PostResponse>('posts', data)
             .then(response => ({
                 data: response.data,
                 status: response.status

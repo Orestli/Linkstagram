@@ -1,12 +1,12 @@
 import instance from "../../utils/instance";
 
-interface AuthI {
+interface AuthResponse {
     success: string
 }
 
 const authAPI = {
     login(login: string, password: string) {
-        return instance.post<AuthI>('login', {login, password})
+        return instance.post<AuthResponse>('login', {login, password})
             .then(response => ({
                 data: response.data,
                 status: response.status,
@@ -14,7 +14,7 @@ const authAPI = {
             }))
     },
     registration(username: string, login: string, password: string) {
-        return instance.post<AuthI>('create-account', {
+        return instance.post<AuthResponse>('create-account', {
             username, login, password
         }).then(response => ({
             data: response.data,

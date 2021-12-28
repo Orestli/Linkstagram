@@ -20,27 +20,28 @@ const ProfileAPI = createSlice({
     name: 'profileAPI',
     initialState,
     reducers: {},
-    extraReducers: {
-        [getProfile.fulfilled.type]: (state, action: PayloadAction<AuthorResponse>) => {
-            state.username = action.payload.username
-            state.description = action.payload.description
-            state.first_name = action.payload.first_name
-            state.followers = action.payload.followers
-            state.following = action.payload.following
-            state.job_title = action.payload.job_title
-            state.last_name = action.payload.last_name
-            state.profile_photo_url = action.payload.profile_photo_url
-        },
-        [editAccount.fulfilled.type]: (state, action: PayloadAction<AuthorResponse>) => {
-            state.username = action.payload.username
-            state.description = action.payload.description
-            state.first_name = action.payload.first_name
-            state.followers = action.payload.followers
-            state.following = action.payload.following
-            state.job_title = action.payload.job_title
-            state.last_name = action.payload.last_name
-            state.profile_photo_url = action.payload.profile_photo_url
-        }
+    extraReducers: builder => {
+        builder
+            .addCase(getProfile.fulfilled.type, (state, action: PayloadAction<AuthorResponse>) => {
+                state.username = action.payload.username
+                state.description = action.payload.description
+                state.first_name = action.payload.first_name
+                state.followers = action.payload.followers
+                state.following = action.payload.following
+                state.job_title = action.payload.job_title
+                state.last_name = action.payload.last_name
+                state.profile_photo_url = action.payload.profile_photo_url
+            })
+            .addCase(editAccount.fulfilled.type, (state, action: PayloadAction<AuthorResponse>) => {
+                state.username = action.payload.username
+                state.description = action.payload.description
+                state.first_name = action.payload.first_name
+                state.followers = action.payload.followers
+                state.following = action.payload.following
+                state.job_title = action.payload.job_title
+                state.last_name = action.payload.last_name
+                state.profile_photo_url = action.payload.profile_photo_url
+            })
     }
 })
 

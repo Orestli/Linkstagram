@@ -81,7 +81,7 @@ const PostsMain: React.FC = () => {
                     </div>
                 </div>
             ))}
-            {Object.keys(selectedPost).length !== 0 &&
+            {selectedPost && Object.keys(selectedPost).length !== 0 &&
                 <ModalPage active={active} setActive={setActive}>
                     <ModalPost selectedPost={selectedPost} postComments={postComments} setActive={setActive}/>
                 </ModalPage>
