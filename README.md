@@ -1,3 +1,5 @@
+# **The app is currently down due to a down server.**
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
